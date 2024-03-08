@@ -1,8 +1,7 @@
 import streamlit as st
 import streamlit_authenticator as stauth
 import yaml
-
-# Load the configuration file for authentication
+from components.camera_component import render_camera_component
 with open('data/pass.yaml') as file:
     config = yaml.load(file, Loader=yaml.SafeLoader)
 
@@ -17,8 +16,7 @@ authenticator = stauth.Authenticate(
 
 # Function to display the main content of the home page after successful login
 def display_home_after_login():
-    st.write(f'Welcome *{name}*')  # Personalized greeting
-    st.title("Your Main Home Page")
+    render_camera_component()
     if st.sidebar.button('Logout'):
         authenticator.logout('logout','unrendered')
     # ... add other components of your home page here
