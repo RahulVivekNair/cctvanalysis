@@ -5,8 +5,9 @@ import requests
 from io import BytesIO
 import base64
 import json
+import matplotlib.pyplot as plt
 
-st.header("cctv", divider='rainbow')
+st.header("CCTV", divider='rainbow')
 uploaded_file = st.file_uploader("Choose an image...", type=["jpg", "jpeg", "png"])
 
 if uploaded_file is not None:
@@ -19,10 +20,28 @@ if uploaded_file is not None:
             response = requests.post("http://localhost:8000/annotate", files=files)
 
             if response.status_code == 200:
-              image_data = json.loads(response.content)  # Load JSON data 
-              image_base64 = image_data["image"]         # Extract the base64 string
-              image_bytes = base64.b64decode(image_base64) 
-              processed_image = Image.open(BytesIO(image_bytes))
-              st.image(processed_image, caption='Processed Image', use_column_width=True)
+                image_data = json.loads(response.content)  # Load JSON data 
+                image_base64 = image_data["image"]         # Extract the base64 string
+                image_bytes = base64.b64decode(image_base64) 
+                processed_image = Image.open(BytesIO(image_bytes))
+                st.image(processed_image, caption='Processed Image', use_column_width=True)
+
+                # Add your crowd management graph here
+                # Simulate crowd data (replace this with actual data from your backend if available)
+                time = np.arange(0, 10, 0.1)
+                crowd_size = np.random.randint(50, 150, size=time.shape)  # Random crowd sizes for demonstration
+
+                # Plotting the crowd management graph
+                st.subheader("Crowd Management Graph")
+                fig, ax = plt.subplots()
+                ax.plot(time, crowd_size)
+                ax.set(xlabel='Time (s)', ylabel='Crowd Size', title='Crowd Size Over Time')
+                ax.grid()
+                st.pyplot(fig)
+
             else:
                 st.error("Image processing failed.")
+
+                
+
+                

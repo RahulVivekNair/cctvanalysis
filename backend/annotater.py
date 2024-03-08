@@ -50,3 +50,5 @@ async def annotate_image(file: UploadFile = File(...)):
     image_base64 = base64.b64encode(image_bytes).decode('utf-8')  
 
     return {"image": image_base64} 
+
+# Run the app with `uvicorn backend:app --reload`
