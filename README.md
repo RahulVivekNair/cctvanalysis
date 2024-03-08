@@ -52,23 +52,15 @@ pip install torch torchvision
 Navigate to frontend directory and run Streamlit:
 
 ```
-
 cd frontend
 streamlit run home.py
-
 ```
 
-Navigate to backend directory and run UVicorn:
+Navigate to backend directory and run UVicorn with fastapi:
 
 ```
-
 cd backend
 uvicorn annotater:app --reload
-
 ```
 
 Now, you should be all set up and running with the project!
-
-```
-
-```
