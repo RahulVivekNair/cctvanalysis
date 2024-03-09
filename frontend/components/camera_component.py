@@ -51,6 +51,9 @@ def render_camera_component(camera_id):
                 if response.status_code == 200:
                     result = response.json()  # Retrieve results in JSON format
                     st.success("Crowd analysis complete!")
-                    st.video(f"../backend/result/camera_{camera_id}_video.mp4")  # Display received results
+                    st.session_state[f"{camera_key}_result"] = result
+  # Display received results
                 else:
                     st.error("Failed to start crowd analysis.")
+    if f"{camera_key}_result" in st.session_state:
+        st.video(f"../backend/result/camera_{camera_id}_video.mp4")
